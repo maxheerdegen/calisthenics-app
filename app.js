@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
 import './src/config/passport.js';
 import passport from 'passport';
+import bcrypt from 'bcryptjs';
 
 const app = express();
 
@@ -15,13 +16,13 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/sign-up", async (req, res, next) => {
-    console.log(req.body);
-    const { username, password } = req.body;
     try {
+        const { username, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = await prisma.user.create({
             data: {
                 username,
-                hashedPassword: password,
+                hashedPassword
             }
         })
         res.json(newUser);
@@ -34,7 +35,6 @@ app.post("/login", async (req, res) => {
 
     try {
         const { username, password } = req.body;
-        console.log(typeof username);
 
         const user = await prisma.user.findUnique({
             where: {
@@ -42,13 +42,13 @@ app.post("/login", async (req, res) => {
             }
         })
 
-        console.log(user);
-
         if(!user) {    
             res.status(401).json({ message: 'Incorrect username or password' })
         }
 
-        if(user.hashedPassword !== password) {
+        const match = await bcrypt.compare(password, user.hashedPassword);
+
+        if(!match) {
             res.status(401).json({ message: 'Incorrect username or password' })
         }
 
