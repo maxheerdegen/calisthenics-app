@@ -13,7 +13,7 @@ async function signUp (req, res, next) {
             }
         })
 
-        res.json(newUser);
+        res.status(201).json({ message: 'User created' });
 
     } catch(err) {
         return next(err);

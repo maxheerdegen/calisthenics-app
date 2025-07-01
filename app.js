@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import './src/config/passport.js';
 import { isAuthenticated } from './src/middleware/isAuthenticated.js';
 import { authRouter } from './src/routes/authRoutes.js';
+import { exerciseRouter } from './src/routes/exerciseRoutes.js';
 
 
 const app = express();
@@ -14,7 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', authRouter);
+app.use('/auth', authRouter);
+app.use('/exercises', isAuthenticated, exerciseRouter);
 
 app.get('/protected', 
     isAuthenticated,
