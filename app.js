@@ -3,7 +3,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import './src/config/passport.js';
-import passport from 'passport';
+import { isAuthenticated } from './src/middleware/isAuthenticated.js';
 import { authRouter } from './src/routes/authRoutes.js';
 
 
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', authRouter);
 
 app.get('/protected', 
-    passport.authenticate('jwt', { session: false }),
+    isAuthenticated,
     (req, res) => {
         res.status(200).json({ message: 'Welcome to protected Route'})
 })
