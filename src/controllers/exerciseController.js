@@ -1,4 +1,3 @@
-import { parse } from 'dotenv';
 import { prisma } from '../config/client.js';
 
 async function findExercise(id) {
@@ -103,3 +102,6 @@ async function deleteExercise(req, res) {
 
 export { createExercise, getExercises, getExerciseById, updateExercise, deleteExercise };
 
+
+
+//to do: use deletemany for single db lookup withoput throwing error when it fails

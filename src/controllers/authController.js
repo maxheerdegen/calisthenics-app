@@ -44,7 +44,7 @@ async function login (req, res) {
         const secret = process.env.JWT_SECRET;
 
         const payload = {
-            username: user.name,
+            username: user.username,
             expiration: Date.now() + parseInt(expirationTimeInMs)
         }
 
