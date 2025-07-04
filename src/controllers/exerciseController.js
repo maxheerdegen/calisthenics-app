@@ -1,12 +1,5 @@
 import { prisma } from '../config/client.js';
-
-async function findExercise(id) {
-    return await prisma.exercise.findUnique({
-        where: {
-            id
-        }
-    })
-}
+import { Prisma } from '@prisma/client';
 
 async function createExercise(req, res) {
     try {
@@ -38,7 +31,11 @@ async function getExercises(req, res) {
 async function getExerciseById(req, res) {
     try {
         const id = parseInt(req.params.id);
-        const exercise = await findExercise(id);
+        const exercise = await prisma.exercise.findUnique({
+            where: {
+                id
+             }
+        })
 
         if(!exercise) {
             return res.status(404).json({ message: 'Exercise not found'});
@@ -54,26 +51,24 @@ async function updateExercise(req,res) {
     try {
         const id = parseInt(req.params.id);
         const { name, description, imgURL } = req.body;
-
-        let exercise = await findExercise(id);
+  
+        await prisma.exercise.update({
+            where: {
+                id
+            },
+            data: {
+                name,
+                description,
+                imgURL
+            }
+        })
         
-        if (exercise) {
-            exercise = await prisma.exercise.update({
-                where: {
-                    id
-                },
-                data: {
-                    name,
-                    description,
-                    imgURL
-                }
-            })
-            return res.status(200).json({ exercise });
-        }
-
-        res.status(404).json({ message: 'Exercise not found'});
+        res.status(200).json({ message: "Exercise updated" });
 
     } catch(err) {
+        if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
+            return res.status(404).json({ message: "Exercise not found" });
+        }
         res.status(500).json({ message: err });
     }
 }
@@ -81,19 +76,18 @@ async function updateExercise(req,res) {
 async function deleteExercise(req, res) {
     try {
         const id = parseInt(req.params.id);
-
-        let exercise = await findExercise(id);
+    
+        const deletedExercise = await prisma.exercise.deleteMany({
+            where: {
+                id
+            }
+        })
         
-        if (exercise) {
-            await prisma.exercise.delete({
-                where: {
-                    id
-                }
-            })
-            return res.status(200).json({ message: 'Exercise deleted' });
+        if (deletedExercise.count === 0) {
+            return res.status(404).json({ message: "Exercise not found" });
         }
 
-        res.status(404).json({ message: 'Exercise not found' });
+        res.status(200).json({ message: "Exercise deleted" });
 
     } catch(err) {
         res.status(500).json({ message: err });

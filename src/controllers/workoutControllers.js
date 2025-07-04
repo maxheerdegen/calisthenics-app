@@ -108,7 +108,7 @@ async function updateWorkout (req, res) {
         res.status(200).json({ message: 'Workout updated' });
     } catch (err) {
         if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
-            res.status(404).json({ message: "Workout not found or unauthorized" });
+            return res.status(404).json({ message: "Workout not found or unauthorized" });
         }
         res.status(500).json({ message: err});
     }
