@@ -136,3 +136,7 @@ dist
 .pnp.*
 
 /generated/prisma
+
+/react/node_modules
+/react/dist
+/react/.env

@@ -47,7 +47,7 @@ async function createWorkout (req, res) {
 
         res.status(200).json({ message: 'Workout created' })
     } catch (err) {
-        res.status(500).json({ message: err});
+        res.status(500).json({ message: err });
     }
 }
 

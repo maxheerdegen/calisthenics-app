@@ -15,16 +15,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/auth', authRouter);
-app.use('/exercises', isAuthenticated, exerciseRouter);
-app.use('/workouts', isAuthenticated, workoutRouter);
-
-app.get('/protected', 
-    isAuthenticated,
-    (req, res) => {
-        res.status(200).json({ message: 'Welcome to protected Route'})
-})
-
+app.use('/api/auth', authRouter);
+app.use('/api/exercises', isAuthenticated, exerciseRouter);
+app.use('/api/workouts', isAuthenticated, workoutRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`App listening on port ${process.env.PORT}!`)
