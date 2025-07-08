@@ -4,7 +4,7 @@ function Homepage () {
     return (
         <>
         <div>Your fitness journey starts here!</div>
-        <Link to="sign-up"></Link>
+        <Link to="sign-up">Sign-Up!</Link>
         </>
     )
 }

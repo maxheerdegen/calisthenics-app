@@ -1,36 +1,12 @@
-import { useState } from "react";
+import AuthForm from "../AuthForm/AuthForm.jsx";
 
 function Login () {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleSubmit = async () => {
+    const handleLogin = async (username, password) => {
 
     }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username">
-                Username: 
-                <input 
-                    type="text"
-                    name="username"
-                    id="username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    />
-            </label>
-            <label htmlFor="password">
-                Password:
-                <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-            </label>
-            <button type="submit">Login</button>
-        </form>
-    )
+    return <AuthForm onSubmit = {handleLogin} buttonName = "Log In"/>
 }
 
 export default Login;
