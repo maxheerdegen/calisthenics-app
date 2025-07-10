@@ -56,7 +56,7 @@ async function login (req, res) {
             secure: false
         })
         .status(200)
-        .json({ message: 'Login successful'})
+        .json({ message: 'Login successful', username: user.username})
 
 
     } catch (err) {
