@@ -26,7 +26,7 @@ function Login () {
     
             console.log(result);
             setUser(result.username);
-            navigate("/");
+            navigate("/dashboard");
 
         } catch (err) {
             console.log(err);

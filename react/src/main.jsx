@@ -7,16 +7,23 @@ import Homepage from './components/Homepage/Homepage.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import SignUp from './components/SignUp/SignUp.jsx';
 import Login from './components/Login/Login.jsx';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: < App />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: < Homepage /> },
+      { index: true, element: <Homepage /> },
       { path: "sign-up", element: <SignUp />},
-      { path: "login", element: <Login /> }
+      { path: "login", element: <Login /> },
+      { element: <ProtectedRoute />,
+      children: [
+        { path: '/dashboard', element: <Dashboard /> }
+        ]
+      },
     ]
   }
 ])
