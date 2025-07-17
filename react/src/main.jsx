@@ -10,6 +10,8 @@ import Login from './components/Login/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Exercises from './components/Exercises/Exercises.jsx';
+import DashbaordLayout from './components/DashboardLayout/DashboardLayout.jsx';
+import NewWorkoutForm from './components/NewWorkoutForm/NewWorkoutForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +24,15 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { element: <ProtectedRoute />,
       children: [
-        { path: "dashboard", element: <Dashboard /> },
-        { path: "exercises", element: <Exercises />} 
+        { 
+          path: "dashboard",
+          element: <DashbaordLayout />,
+          children: [
+            { index: true, element: <Dashboard /> },
+            { path: "exercises", element: <Exercises />}, 
+            { path: "new-workout", element: <NewWorkoutForm />}
+          ]
+        },
         ]
       },
     ]
