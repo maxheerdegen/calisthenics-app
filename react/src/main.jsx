@@ -9,6 +9,7 @@ import SignUp from './components/SignUp/SignUp.jsx';
 import Login from './components/Login/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
+import Exercises from './components/Exercises/Exercises.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { element: <ProtectedRoute />,
       children: [
-        { path: '/dashboard', element: <Dashboard /> }
+        { path: "dashboard", element: <Dashboard /> },
+        { path: "exercises", element: <Exercises />} 
         ]
       },
     ]

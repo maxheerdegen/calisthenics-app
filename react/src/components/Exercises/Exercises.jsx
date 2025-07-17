@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 function useWorkouts () {
-    const [workouts, setWorkouts] = useState([]);
+    const [exercises, setExercises] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/workouts", {
+        fetch("http://localhost:3000/api/exercises", {
             method: "GET",
             credentials: "include"
         })
@@ -17,33 +16,30 @@ function useWorkouts () {
             }
             return response.json();
         })
-        .then((response) => setWorkouts(response))
+        .then((response) => setExercises(response))
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
     }, []);
 
-    return { workouts, loading, error };
+    return { exercises, loading, error };
 }
 
-function Dashboard () {
+function Exercises () {
 
-    const { workouts, loading, error } = useWorkouts();
+    const { exercises, loading, error } = useWorkouts();
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>A newtork error was encountered.</p>
 
 
     return (
-        <>
-            <Link to="/exercises">Exercises</Link>
-            <div>
-                {workouts &&
-                workouts.map((workout) => (
-                    <div key={workout.id}>{workout.name}</div>
-                ))}
-            </div>
-        </>
+        <div>
+            {exercises &&
+            exercises.map((exercise) => (
+                <div key={exercise.id}>{exercise.name}</div>
+            ))}
+        </div>
     )
 }
 
-export default Dashboard;
+export default Exercises;
