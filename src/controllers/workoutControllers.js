@@ -5,6 +5,7 @@ async function getWorkouts (req, res) {
     try {
         const workouts = await prisma.workout.findMany({
             select: {
+                id: true,
                 name: true,
                 exercises: true,
             },
