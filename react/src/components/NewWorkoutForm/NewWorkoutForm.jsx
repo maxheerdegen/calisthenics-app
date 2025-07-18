@@ -7,9 +7,16 @@ function NewWorkoutForm () {
     const { exercises, loading, error } = useExercises();
     const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
 
-    const addExerciseToWorkout = (id) => {
+    const addExerciseToWorkout = (exercise) => {
         setShowExercises(false);
-        setExercisesInWorkout([...exercisesInWorkout, {id}])
+        setExercisesInWorkout([...exercisesInWorkout, exercise])
+    }
+
+    const handleInputChange = (id, value, field) => {
+        setExercisesInWorkout(exercisesInWorkout.map((ex) => {
+            return ex.id === id ? {...ex, [field]: value} : ex;
+        }))
+        console.log(exercisesInWorkout);
     }
 
     const handleSubmit = async () => {
@@ -24,9 +31,9 @@ function NewWorkoutForm () {
         {showExercises ? (
         <div>
             {exercises && exercises.map((exercise) => (
-                <div>
-                    <div key={exercise.id}>{exercise.name}</div>
-                    <button onClick={() => addExerciseToWorkout(exercise.id)}>Add exercise</button>
+                <div key={exercise.id}>
+                    <div>{exercise.name}</div>
+                    <button onClick={() => addExerciseToWorkout(exercise)}>Add exercise</button>
                 </div>
             ))}
         </div>
@@ -37,10 +44,29 @@ function NewWorkoutForm () {
                 Workout name:
                 <input type="text" id="workoutName" required/>
                 <div>
-                    {exercisesInWorkout.map((workoutEx) => {
-                        const match = exercises.find((ex) => ex.id === workoutEx.id)
-                        return <div>{match.name}</div>
-                    })}
+                    {exercisesInWorkout.map((ex) => (
+                        <div key={`workout-${ex.id}`}>
+                            <div>{ex.name}</div>
+                            <label htmlFor="sets">
+                                Sets:
+                                <input 
+                                    type="number" 
+                                    id="sets" 
+                                    value={ex.sets ?? 0} 
+                                    min={0}
+                                    onChange={(e) => handleInputChange(ex.id, e.target.value, "sets")}/>
+                            </label>
+                            <label htmlFor="reps">
+                                Reps:
+                                <input 
+                                    type="number" 
+                                    id="reps"
+                                    value={ex.reps ?? 0}
+                                    min={0}
+                                    onChange={(e) => handleInputChange(ex.id, e.target.value, "reps")} />
+                            </label>
+                        </div>
+                    ))}
                 </div>
             </label>
             <div>
