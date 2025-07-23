@@ -36,4 +36,23 @@ function useExercises () {
     return { exercises, loading, error };
 }
 
-export { useWorkouts, useExercises };
+function useWorkoutById (id) {
+    const {data: workout, loading, error } = useFetchData(`workouts/${id}`);
+    let processedWorkout = null;
+
+    if (workout.exercises) {
+        processedWorkout = {
+            ...workout,
+            exercises: workout.exercises.map(({ exerciseId, ...rest }) => ({
+                id: exerciseId,
+                ...rest,
+            }))
+        }
+    }
+
+    console.log(processedWorkout);
+
+    return { processedWorkout, loading, error };
+}
+
+export { useWorkouts, useExercises, useWorkoutById };

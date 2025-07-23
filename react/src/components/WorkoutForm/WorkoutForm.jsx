@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useExercises } from "../../hooks/useWorkoutAndExercises";
+import { useNavigate, useParams } from "react-router-dom";
 
-function NewWorkoutForm () {
+function WorkoutForm ({ mode, onClose, workout }) {
 
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [showExercises, setShowExercises] = useState(false);
     const { exercises, loading, error } = useExercises();
-    const [workoutName, setWorkoutName] = useState("");
-    const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
+    const [workoutName, setWorkoutName] = useState(workout.name || "");
+    const [exercisesInWorkout, setExercisesInWorkout] = useState(workout.exercises || []);
 
     const addExerciseToWorkout = (exercise) => {
         setShowExercises(false);
@@ -33,23 +36,37 @@ function NewWorkoutForm () {
         })
         const body = {name: workoutName, exercises: exercisesToSubmit}
 
+        const endpoint = mode === "create" ? "api/workouts" : `api/workouts/${id}`;
+        const method = mode === "create" ? "POST" : "PUT";
+
+        console.log(endpoint);
         console.log(body);
 
-        const response = await fetch('http://localhost:3000/api/workouts', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-            credentials: "include",
-        });
-
-        if(!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+        try {
+            const response = await fetch(`http://localhost:3000/${endpoint}`, {
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+                credentials: "include",
+            });
+    
+            if(!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            console.log(result);
+        } catch(err) {
+            console.log(err);
         }
 
-        const result = await response.json();
-        console.log(result);
+        if (onClose) {
+            onClose();
+        } else {
+            navigate("/dashboard");
+        }
     }
 
     if (loading) return <p>Loading...</p>
@@ -108,11 +125,11 @@ function NewWorkoutForm () {
                 Exercises:
                 <button onClick={() => setShowExercises(true)}>Add exercise</button>
             </div>
-            <button type="submit">Add workout</button>
+            <button type="submit">{mode === "create" ? "Add new workout" : "Update workout"}</button>
         </form>
         )}
         </>
     )
 }
 
-export default NewWorkoutForm;
+export default WorkoutForm;

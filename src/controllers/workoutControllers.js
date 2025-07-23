@@ -60,7 +60,14 @@ async function getWorkoutById (req, res) {
         const workoutById = await prisma.workout.findUnique({
             select: {
                 name: true,
-                exercises: true
+                exercises: {
+                    select: {
+                        exerciseId: true,
+                        order: true,
+                        sets: true,
+                        reps: true,
+                    }
+                }
              },
             where: {
                 id,
@@ -74,7 +81,7 @@ async function getWorkoutById (req, res) {
             return res.status(404).json({ message: "Workout not found or unauthorized" })
         }
 
-        res.status(200).json({ workoutById });
+        res.status(200).json(workoutById);
     } catch (err) {
         res.status(500).json({ message: err});
     }
@@ -92,6 +99,8 @@ async function updateWorkout (req, res) {
                     deleteMany: {},
                     create: exercises.map((ex) => ({
                         order: ex.order,
+                        sets: ex.sets,
+                        reps: ex.reps,
                         exercise: {
                         connect: {
                             id: parseInt(ex.id),
