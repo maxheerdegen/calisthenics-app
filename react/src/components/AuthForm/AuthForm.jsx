@@ -17,7 +17,7 @@ function AuthForm ({ onSubmit, buttonName }) {
                 Username:
                 <input
                     type="text"
-                    name="username"
+                    value={username}
                     id="username"
                     onChange={(e) => setUsername(e.target.value)}
                 />
@@ -26,7 +26,7 @@ function AuthForm ({ onSubmit, buttonName }) {
                 Password:
                 <input
                     type="password"
-                    name="password"
+                    value={password}
                     id="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />

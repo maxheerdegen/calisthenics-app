@@ -36,6 +36,8 @@ async function createWorkout (req, res) {
                 exercises: {
                     create: exercises.map((ex) => ({
                         order: ex.order,
+                        sets: ex.sets,
+                        reps: ex.reps,
                         exercise: { 
                             connect: {
                                 id: parseInt(ex.id),
