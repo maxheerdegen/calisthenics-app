@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
+import logo from "../../assets/logo.svg";
 
 function Header ({ user, setUser }) {
 
@@ -22,9 +24,11 @@ function Header ({ user, setUser }) {
 
     return (
         <header>
-            <Link to="/">Fitness App Logo</Link>
+            <Link to="/" className={styles.logo}>
+                <img src={logo} alt="" />
+                <div className={styles.logoText}>Cali App</div>
+            </Link>
             <ul>
-                <li><Link to="/">Homepage</Link></li>
                 {
                 !user ?  (
                     <li><Link to="login">Login</Link></li>
@@ -32,6 +36,7 @@ function Header ({ user, setUser }) {
                     <li><button onClick={handleLogout}>Logout</button></li>
                 )
                 }
+                <li><Link to="sign-up" className={styles.getStarted}>Get Started</Link></li>
             </ul>
         </header>
     )

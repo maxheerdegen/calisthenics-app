@@ -1,0 +1,42 @@
+header {
+    background-color: var(--color-bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 100vw;
+    color: var(--color-text-light);
+    padding: 20px 50px;
+}
+
+ul {
+    display: flex;
+    gap: 20px;
+}
+
+.logo img {
+    width: 100px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoText {
+    transform: translateY(-15px);
+    font-style: italic;
+}
+
+.getStarted {
+    background-color: var(--color-neutral);
+    color: var(--color-text-dark);
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+.getStarted:visited {
+    color: var(--color-text-dark);
+}

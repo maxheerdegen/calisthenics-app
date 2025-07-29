@@ -1,0 +1,106 @@
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+    
+}
+
+.wrapper {
+    transform: translateY(-200px);
+}
+
+.wrapperLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    transform: translateY(-100px);
+}
+
+.buttonLink {
+    opacity: 0;
+    padding: 10px 100px;
+    border-radius: 50px;
+    text-align: center;
+    width: 500px;
+    font-weight: bold;
+    animation: slideIn 1.5s 1.5s ease-in forwards;
+}
+
+.catchPhrase {
+    animation: slideIn 1.5s 0.3s ease-in forwards;
+    opacity: 0;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.signUp {
+    background-color: var(--color-accent-blue);
+    color: var(--color-text-light);
+}
+
+.login {
+    background-color: var(--color-neutral);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-dark);
+}
+
+.signUp:visited {
+    color: var(--color-text-light);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-width: 100vw;
+    flex: 1;
+    padding: 20px;
+}
+
+.contentTop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/calisthenics-park-amsterdam.jpg");
+    background-size: cover;
+    background-position-y: 30%;
+    min-width: 100vw;
+    height: 700px;
+    margin-top: -20px;
+}
+
+.features {
+    margin: 50px 0px;
+    display: flex;
+    gap: 70px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 200px;
+}
+
+.card img {
+    width: 150px;
+    filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(3587%) hue-rotate(203deg) brightness(99%) contrast(96%);
+}
+
+.cardTitle {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.cardText {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}

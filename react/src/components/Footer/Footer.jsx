@@ -1,6 +1,8 @@
+import "./Footer.module.css";
+
 function Footer () {
     return (
-        <div>Footer placeholder</div>
+        <footer>Footer placeholder</footer>
     )
 }
 

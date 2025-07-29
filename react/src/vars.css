@@ -1,0 +1,14 @@
+:root {
+    --color-bg-dark: #111827;
+    --color-bg-light: #F3F4F6;
+    --color-text-dark: #111827;
+    --color-text-light: #FFFFFF;
+
+    --color-accent-red: #EF4444;
+    --color-accent-red-hover: #DC2626;
+    --color-accent-blue: #3B82F6;
+
+    --color-neutral: #E5E7EB;
+    --color-text-secondary: #6B7280;
+    --color-border: #D1D5DB;
+}
