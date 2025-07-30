@@ -34,7 +34,7 @@ function Login () {
 
     }
 
-    return <AuthForm onSubmit = {handleLogin} buttonName = "Log In"/>
+    return <AuthForm onSubmit = {handleLogin} mode = "Login"/>
 }
 
 export default Login;

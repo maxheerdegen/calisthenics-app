@@ -23,7 +23,7 @@ function SignUp () {
         }
     }
 
-    return <AuthForm onSubmit={handleSignUp} buttonName="Sign Up" />
+    return <AuthForm onSubmit={handleSignUp} mode="Sign Up" />
 }
 
 export default SignUp;
