@@ -31,12 +31,14 @@ function Header ({ user, setUser }) {
             <ul>
                 {
                 !user ?  (
-                    <li><Link to="login">Login</Link></li>
+                    <div>
+                        <li><Link to="login">Login</Link></li>
+                        <li><Link to="sign-up" className={styles.getStarted}>Get Started</Link></li>
+                    </div>
                 ) : (
-                    <li><button onClick={handleLogout}>Logout</button></li>
+                    <li><button onClick={handleLogout} className={styles.logout}>Logout</button></li>
                 )
                 }
-                <li><Link to="sign-up" className={styles.getStarted}>Get Started</Link></li>
             </ul>
         </header>
     )

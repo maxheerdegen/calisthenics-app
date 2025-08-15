@@ -8,9 +8,10 @@ header {
     padding: 20px 50px;
 }
 
-ul {
+ul div {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .logo img {
@@ -37,6 +38,17 @@ ul {
     border-radius: 30px;
 }
 
+.getStarted:hover {
+    background-color: var(--color-neutral-hover);
+}
+
 .getStarted:visited {
     color: var(--color-text-dark);
+}
+
+.logout {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    padding: 0px;
+    margin-top: 0px;
 }

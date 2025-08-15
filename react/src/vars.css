@@ -7,8 +7,10 @@
     --color-accent-red: #EF4444;
     --color-accent-red-hover: #DC2626;
     --color-accent-blue: #3B82F6;
+    --color-accent-blue-hover: #2563EB;
 
     --color-neutral: #E5E7EB;
+    --color-neutral-hover: #D1D5DB;
     --color-text-secondary: #6B7280;
     --color-border: #D1D5DB;
 }

@@ -1,8 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
+import styles from "./DashboardLayout.module.css";
 
 function DashbaordLayout () {
     return (
-        <div>
+        <div className={styles.dashboard}>
             <aside>Sidebar
                 <ul>
                     <li><Link to="/dashboard">Home</Link></li>

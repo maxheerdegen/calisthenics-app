@@ -12,7 +12,11 @@ function Exercises () {
         <div>
             {exercises &&
             exercises.map((exercise) => (
-                <div key={exercise.id}>{exercise.name}</div>
+                <div key={exercise.id}>
+                    <div>{exercise.name}</div>
+                    <div>{exercise.description}</div>
+                    <img src={exercise.imgURL} alt="" />
+                </div>
             ))}
         </div>
     )
