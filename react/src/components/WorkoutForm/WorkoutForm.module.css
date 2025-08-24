@@ -1,0 +1,56 @@
+.container {
+    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.exerciseTitle {
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.exercise {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.exerciseIMG {
+    height: 200px;
+    width: 100%;
+}
+
+button {
+    width: 50%;
+}
+
+form .exerciseIMG {
+    width: 50%;
+}
+
+.exercisesInWorkoutContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 0.5fr));
+    gap: 10px;
+}
+
+.exerciseInWorkout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.imgRepsSets {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.exercise, .exerciseInWorkout, .imgRepsSets, .exercisesInWorkoutContainer {
+    border: 1px solid var(--color-border);
+}

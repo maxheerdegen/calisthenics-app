@@ -1,3 +1,23 @@
 .dashboard {
     display: flex;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+ul {
+    padding: 0px;
+}
+
+aside {
+    padding: 20px;
+    background-color: var(--color-accent-blue);
+    margin-left: 0px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 50px
 }

@@ -40,6 +40,8 @@ function useWorkoutById (id) {
     const {data: workout, loading, error } = useFetchData(`workouts/${id}`);
     let processedWorkout = null;
 
+    console.log(workout);
+
     if (workout.exercises) {
         processedWorkout = {
             ...workout,

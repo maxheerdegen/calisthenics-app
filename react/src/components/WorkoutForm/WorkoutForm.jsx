@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useExercises } from "../../hooks/useWorkoutAndExercises";
 import { useNavigate, useParams } from "react-router-dom";
+import styles from "./WorkoutForm.module.css";
 
 function WorkoutForm ({ mode, onClose, workout }) {
 
@@ -8,8 +9,8 @@ function WorkoutForm ({ mode, onClose, workout }) {
     const navigate = useNavigate();
     const [showExercises, setShowExercises] = useState(false);
     const { exercises, loading, error } = useExercises();
-    const [workoutName, setWorkoutName] = useState(workout.name || "");
-    const [exercisesInWorkout, setExercisesInWorkout] = useState(workout.exercises || []);
+    const [workoutName, setWorkoutName] = useState(workout?.name || "");
+    const [exercisesInWorkout, setExercisesInWorkout] = useState(workout?.exercises || []);
 
     const addExerciseToWorkout = (exercise) => {
         setShowExercises(false);
@@ -75,10 +76,11 @@ function WorkoutForm ({ mode, onClose, workout }) {
     return (
         <>
         {showExercises ? (
-        <div>
+        <div className={styles.container}>
             {exercises && exercises.map((exercise) => (
-                <div key={exercise.id}>
-                    <div>{exercise.name}</div>
+                <div key={exercise.id} className={styles.exercise}>
+                    <div className={styles.exerciseTitle}>{exercise.name}</div>
+                    <img src={exercise.imgURL} alt="" className={styles.exerciseIMG}/>
                     <button onClick={() => addExerciseToWorkout(exercise)}>Add exercise</button>
                 </div>
             ))}
@@ -87,42 +89,48 @@ function WorkoutForm ({ mode, onClose, workout }) {
         (
         <form onSubmit={handleSubmit}>
             <label htmlFor="workoutName">
-                Workout name:
+                Workout Name:
                 <input 
                     type="text" 
                     id="workoutName" 
+                    placeholder="Workout Name"
                     value={workoutName}
                     onChange={(e) => setWorkoutName(e.target.value)}
                     required/>
-                <div>
-                    {exercisesInWorkout.map((ex) => (
-                        <div key={`workout-${ex.id}`}>
-                            <div>{ex.name}</div>
-                            <label htmlFor="sets">
-                                Sets:
-                                <input 
-                                    type="number" 
-                                    id="sets" 
-                                    value={ex.sets ?? 0} 
-                                    min={0}
-                                    onChange={(e) => handleInputChange(ex.id, e.target.value, "sets")}/>
-                            </label>
-                            <label htmlFor="reps">
-                                Reps:
-                                <input 
-                                    type="number" 
-                                    id="reps"
-                                    value={ex.reps ?? 0}
-                                    min={0}
-                                    onChange={(e) => handleInputChange(ex.id, e.target.value, "reps")} />
-                            </label>
-                            <button onClick={() => handleRemove(ex.id)}>Remove exercise</button>
-                        </div>
-                    ))}
-                </div>
             </label>
+            <div className={styles.exerciseTitle}>Exercises:</div>
+            <div className={styles.exercisesInWorkoutContainer}>
+                {exercisesInWorkout.map((ex) => (
+                    <div key={`workout-${ex.id}`} className={styles.exerciseInWorkout}>
+                        <div className={styles.exerciseTitle}>{ex.name}</div>
+                        <div className={styles.imgRepsSets}>
+                            <img src={ex.imgURL} alt="" className={styles.exerciseIMG}/>
+                            <div>
+                                <label htmlFor="reps">
+                                    Reps:
+                                    <input
+                                        type="number"
+                                        id="reps"
+                                        value={ex.reps ?? 0}
+                                        min={0}
+                                        onChange={(e) => handleInputChange(ex.id, e.target.value, "reps")} />
+                                </label>
+                                <label htmlFor="sets">
+                                    Sets:
+                                    <input
+                                        type="number"
+                                        id="sets"
+                                        value={ex.sets ?? 0}
+                                        min={0}
+                                        onChange={(e) => handleInputChange(ex.id, e.target.value, "sets")}/>
+                                </label>
+                            </div>
+                        </div>
+                        <button onClick={() => handleRemove(ex.id)}>Remove exercise</button>
+                    </div>
+                ))}
+            </div>
             <div>
-                Exercises:
                 <button onClick={() => setShowExercises(true)}>Add exercise</button>
             </div>
             <button type="submit">{mode === "create" ? "Add new workout" : "Update workout"}</button>

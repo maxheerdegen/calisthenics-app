@@ -4,13 +4,13 @@ import styles from "./DashboardLayout.module.css";
 function DashbaordLayout () {
     return (
         <div className={styles.dashboard}>
-            <aside>Sidebar
+            <aside>
                 <ul>
                     <li><Link to="/dashboard">Home</Link></li>
                     <li><Link to="exercises">Exercises</Link></li>
                 </ul>
             </aside>
-            <div>
+            <div className={styles.content}>
                 <Outlet />
             </div>
         </div>

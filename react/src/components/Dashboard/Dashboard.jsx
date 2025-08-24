@@ -14,7 +14,7 @@ function Dashboard () {
             <div>
                 {workouts &&
                 workouts.map((workout) => (
-                    <button key={workout.id}><Link to={`workouts/${workout.id}`}>{workout.name}</Link></button>
+                    <div key={workout.id}><Link to={`workouts/${workout.id}`}>{workout.name}</Link></div>
                 ))}
             </div>
             <button><Link to="new">Add new workout</Link></button>
