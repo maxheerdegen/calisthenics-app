@@ -62,10 +62,15 @@ async function getWorkoutById (req, res) {
                 name: true,
                 exercises: {
                     select: {
-                        exerciseId: true,
                         order: true,
                         sets: true,
                         reps: true,
+                        exercise: {
+                            select: {
+                                name: true,
+                                imgURL: true,
+                            }
+                        }
                     }
                 }
              },

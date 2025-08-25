@@ -45,8 +45,9 @@ function useWorkoutById (id) {
     if (workout.exercises) {
         processedWorkout = {
             ...workout,
-            exercises: workout.exercises.map(({ exerciseId, ...rest }) => ({
-                id: exerciseId,
+            exercises: workout.exercises.map(({ exercise, ...rest }) => ({
+                name: exercise.name,
+                imgURL: exercise.imgURL,
                 ...rest,
             }))
         }
