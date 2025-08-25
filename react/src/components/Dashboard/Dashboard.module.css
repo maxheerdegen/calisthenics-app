@@ -1,0 +1,38 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    align-self: flex-start;
+    position: absolute;
+    left: 50px;
+}
+
+.newButton {
+    position: absolute;
+    bottom: 40px;
+    width: 20%;
+    right: 40px;
+}
+
+.details {
+    background-color: var(--color-accent-blue);
+    padding: 8px;
+    border-radius: 20px;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.workout {
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    background-color: var(--color-neutral);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.workoutTitle {
+    font-weight: bold;
+}

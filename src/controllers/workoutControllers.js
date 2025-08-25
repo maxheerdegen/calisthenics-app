@@ -67,6 +67,7 @@ async function getWorkoutById (req, res) {
                         reps: true,
                         exercise: {
                             select: {
+                                id: true,
                                 name: true,
                                 imgURL: true,
                             }
