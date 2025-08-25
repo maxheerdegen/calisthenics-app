@@ -13,6 +13,7 @@ import Exercises from './components/Exercises/Exercises.jsx';
 import DashbaordLayout from './components/DashboardLayout/DashboardLayout.jsx';
 import WorkoutForm from './components/WorkoutForm/WorkoutForm.jsx';
 import WorkoutDetail from './components/WorkoutDetail/WorkoutDetail.jsx';
+import StartWorkout from './components/StartWorkout/StartWorkout.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
             { index: true, element: <Dashboard /> },
             { path: "exercises", element: <Exercises />}, 
             { path: "new", element: <WorkoutForm mode="create"/>},
-            { path: "workouts/:id", element: <WorkoutDetail />}
+            { path: "workouts/:id", element: <WorkoutDetail />},
+            { path: "workouts/:id/start", element: <StartWorkout />}
           ]
         },
         ]

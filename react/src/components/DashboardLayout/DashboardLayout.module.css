@@ -13,6 +13,7 @@ aside {
     background-color: var(--color-neutral);
     margin-left: 0px;
     font-weight: bold;
+    box-shadow: var(--shadow);
 }
 
 .content {

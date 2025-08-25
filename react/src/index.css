@@ -80,7 +80,7 @@ label {
 }
 
 input:hover {
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.94);
+  box-shadow: var(--shadow);
 }
 
 a, a:visited {

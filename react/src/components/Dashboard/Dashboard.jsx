@@ -16,7 +16,7 @@ function Dashboard () {
                 workouts.map((workout) => (
                     <div key={workout.id} className={styles.workout}>
                         <div className={styles.workoutTitle}>{workout.name}</div>
-                        <div className={styles.details}><Link to={`workouts/${workout.id}`}>Show Details</Link></div>
+                        <Link to={`workouts/${workout.id}`} className={styles.details}>Show Details</Link>
                         <button onClick={() => deleteWorkout(workout.id)}>Delete Workout</button>
                     </div>
 

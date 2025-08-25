@@ -13,4 +13,6 @@
     --color-neutral-hover: #D1D5DB;
     --color-text-secondary: #6B7280;
     --color-border: #D1D5DB;
+
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }

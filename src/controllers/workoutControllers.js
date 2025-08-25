@@ -60,6 +60,7 @@ async function getWorkoutById (req, res) {
         const workoutById = await prisma.workout.findUnique({
             select: {
                 name: true,
+                id: true,
                 exercises: {
                     select: {
                         order: true,
