@@ -36,11 +36,11 @@ function StartWorkout () {
             setIndex(index + 1);
             setCurrentExercise(workout.exercises[index+1]);
             setSetCounter(1);
-            setSeconds(10);
+            setSeconds(180);
         }
         else {
             setSetCounter((setCounter) => setCounter + 1);
-            setSeconds(1);
+            setSeconds(60);
         }
     }
 
