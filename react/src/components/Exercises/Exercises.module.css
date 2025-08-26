@@ -6,12 +6,13 @@
 }
 
 .exercise {
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    box-shadow: var(--shadow);
 }
 
 .exerciseTitle {
@@ -27,4 +28,6 @@
 .exerciseIMG {
     height: 400px;
     margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
 }

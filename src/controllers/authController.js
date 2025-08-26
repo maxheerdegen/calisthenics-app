@@ -64,6 +64,15 @@ async function login (req, res) {
     }
 }
 
+function me (req, res) {
+    if (req.user) {
+        res.json({message: "authenticated", username: req.user.username})
+    }
+    else {
+        res.status(401).json({ username: null});
+    }
+}
+
 function logout (req, res) {
     if (!req.cookies['jwt']) {
         res.status(401).json({ message: 'Invalid jwt'})
@@ -75,4 +84,4 @@ function logout (req, res) {
     .json({ message: 'Logout successful'})
 }
 
-export { signUp, login, logout };
+export { signUp, login, me, logout };

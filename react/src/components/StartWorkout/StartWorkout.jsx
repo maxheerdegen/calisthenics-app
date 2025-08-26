@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import styles from "./StartWorkout.module.css";
 
 function StartWorkout () {
 
     const { state } = useLocation();
     const workout = state.workout;
     const [seconds, setSeconds] = useState(3);
-    const [currentExercise, setCurrentExercise] = useState();
+    const [currentExercise, setCurrentExercise] = useState(workout.exercises[0]);
     const [index, setIndex] = useState(0);
-    const [repBreak, setRepBreak] = useState(true);
-    const [setBreak, setSetBreak] = useState(false);
+    const [setCounter, setSetCounter] = useState(1);
     const [workoutDone, setWorkoutDone] = useState(false);
 
     useEffect(() => {
@@ -17,37 +17,52 @@ function StartWorkout () {
             const timer = setTimeout(() => setSeconds(seconds - 1), 1000);
             return () => clearTimeout(timer);
         }
-        if (seconds === 0) {
-            if (index < workout.exercises.length) {
-                setCurrentExercise(workout.exercises[index])
-                setIndex((index) => index+1);
-                setSeconds(3);
-            }
-            else {
-                setSeconds(undefined);
-                setCurrentExercise(undefined);
-                setWorkoutDone(true);
-            }
-        }
-    }, [seconds, index, workout.exercises])
+    }, [seconds])
 
-    console.log(index)
+    const handleNextSet = async () => {
+
+        const nextCount = setCounter + 1;
+        const totalSets = workout.exercises[index].sets;
+        
+        if (nextCount > totalSets) {
+            
+            const isLastExercise = index + 1 >= workout.exercises.length;
+            
+            if(isLastExercise) {
+                setWorkoutDone(true);
+                return;
+            }
+            
+            setIndex(index + 1);
+            setCurrentExercise(workout.exercises[index+1]);
+            setSetCounter(1);
+            setSeconds(10);
+        }
+        else {
+            setSetCounter((setCounter) => setCounter + 1);
+            setSeconds(1);
+        }
+    }
 
     return (
         <>  
-            {seconds > 0 &&
-            <div>{seconds}</div>
-            }
-            {currentExercise &&
-            <>
-                <div>{currentExercise.name}</div>
-                <img src={currentExercise.imgURL} alt="" />
-            </> 
-            }
-            {
-                workoutDone &&
-                <div>Workout done!</div>
-            }  
+            {workoutDone ? (
+            <div className={styles.done}>Workout done! Congratulations!</div>
+            ) : (
+                <div className={styles.container}>
+                    <div className={styles.countdown}>{seconds > 0 ? seconds : 'Start!'}</div>      
+                    {currentExercise && (
+                    <>
+                        <div className={styles.nextExercise}>Next Exercise:</div>
+                        <div>{currentExercise.name}</div>
+                        <div>Set: {setCounter}/{workout.exercises[index].sets}</div>
+                        <img src={currentExercise.imgURL} alt="" className={styles.exerciseImg}/>
+                        <button onClick={handleNextSet}>Set done!</button>
+                        <Link to="/Dashboard" className={styles.endWorkout}>End Workout</Link>
+                    </> 
+                    )}
+                </div>
+            )}
         </>
     )
 }
